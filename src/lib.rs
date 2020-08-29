@@ -23,7 +23,7 @@ mod tests {
     #[test]
     fn ioactive_rust_impl() {
         assert_eq!(
-            ioactive_checksum(0x02, 0xe4, 0x05, &[0xf8, 0, 0, 0]) & 0xff,
+            ioactive_checksum(0x02, 0xe4, 0x05, &[0xf8, 0, 0, 0]),
             0xe3
         );
     }
