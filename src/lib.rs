@@ -12,10 +12,6 @@ fn comma_input(address: u16, data: &[u8]) -> u8 {
     ioactive_checksum(idh, idl, len, data_trimmed)
 }
 
-fn toyota_checksum_existing(address: u16, data: u64, length: u8) -> u8 {
-    0
-}
-
 pub fn ioactive_checksum(idh: u8, idl: u8, len: u8, data: &[u8]) -> u8 {
     let data_sum: u8 = data
         .iter()
@@ -52,5 +48,46 @@ mod tests {
     #[test]
     fn test_copy_paste_input_valid() {
         assert_eq!(copy_paste_input(0x2e4, "f8000000e3"), 0xe3);
+    }
+
+    #[test]
+    fn test_nelsons_corolla_2() {
+        assert_eq!(copy_paste_input(0x2e4, "e2000000cd"), 0xcd)
+    }
+
+
+    #[test]
+    fn test_nelsons_corolla_128() {
+        assert_eq!(copy_paste_input(0x2e4, "e2000000cd"), 0xcd)
+    }
+
+    #[test]
+    fn test_nelsons_corolla_130() {
+        assert_eq!(copy_paste_input(0x2e4, "940000007f"), 0x7f)
+    }
+
+    #[test]
+    fn test_nelsons_corolla_0() {
+        assert_eq!(copy_paste_input(0x2e4, "940000007f"), 0x7f)
+    }
+
+    #[test]
+    fn test_comma_prime_lka_128() {
+        assert_eq!(copy_paste_input(0x2e4, "ba000000a5"), 0xa5);
+    }
+
+    #[test]
+    fn test_comma_prime_lka_2() {
+        assert_eq!(copy_paste_input(0x2e4, "a4000000fb3b64cd"), 0xcd);
+    }
+
+    #[test]
+    fn test_comma_prime_lka_2_trim() {
+        assert_eq!(copy_paste_input(0x2e4, "a4000000fb"), 0xfb);
+    }
+
+    #[test]
+    fn test_comma_prime_lka_0() {
+        assert_eq!(copy_paste_input(0x2e4, "920000004d2ac577"), 0x77);
     }
 }
