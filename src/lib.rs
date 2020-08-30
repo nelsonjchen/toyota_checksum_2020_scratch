@@ -129,9 +129,10 @@ mod tests {
 
     #[test]
     fn test_crc32_just_data() {
+        // 9e00000022714b01
         assert_eq!(
-            crc::crc32::checksum_ieee(&[0x92, 0x00, 0x00, 0x00]),
-            0x4d2ac577
+            format!("{:02x}", crc::crc32::checksum_ieee(&[0x02, 0xe4, 0x08, 0x9e, 0x00, 0x00, 0x00])),
+            format!("{:02x}", 0x4d2ac577)
         );
     }
 }
