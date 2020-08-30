@@ -95,14 +95,21 @@ mod tests {
     }
 
     #[test]
-    fn test_comma_prime_lka_2() {
+    fn test_comma_matty_prime_lka_2() {
         assert_eq!(copy_paste_input(0x2e4, "d8000000022d38ec"), 0xec);
     }
 
     #[test]
-    fn test_comma_prime_lka_0() {
+    fn test_comma_matty_prime_lka_0() {
         assert_eq!(copy_paste_input(0x2e4, "920000004d2ac577"), 0x77);
     }
+
+
+    #[test]
+    fn test_comma_matty_prime_pc_0() {
+        assert_eq!(copy_paste_input(0x283, "0000000093264705"), 0x05);
+    }
+
 
     #[test]
     fn test_comma_prime_lka_nelson_0() {
@@ -124,14 +131,6 @@ mod tests {
     fn test_crc32_just_data() {
         assert_eq!(
             crc::crc32::checksum_ieee(&[0x92, 0x00, 0x00, 0x00]),
-            0x4d2ac577
-        );
-    }
-
-    #[test]
-    fn test_crc32_addr_len_data() {
-        assert_eq!(
-            crc::crc32::checksum_ieee(&[0x02, 0xe4, 0x08, 0x92, 0x00, 0x00, 0x00]),
             0x4d2ac577
         );
     }
