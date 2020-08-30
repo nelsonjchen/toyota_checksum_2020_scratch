@@ -112,4 +112,19 @@ mod tests {
     fn test_comma_prime_lka_nelson_0() {
         assert_eq!(copy_paste_nelson_input(0x2e4, "920000004d2ac577"), 0x4d2ac577);
     }
+
+    #[test]
+    fn test_comma_prime_lka_nelson_crc32() {
+        assert_eq!(copy_paste_nelson_input(0x2e4, "920000004d2ac577"), 0x4d2ac577);
+    }
+
+    #[test]
+    fn test_crc32_just_data() {
+        assert_eq!(crc::crc32::checksum_ieee(&[0x92,0x00,0x00,0x00]), 0x4d2ac577);
+    }
+
+    #[test]
+    fn test_crc32_addr_len_data() {
+        assert_eq!(crc::crc32::checksum_ieee(&[0x02,0xe4, 0x08, 0x92,0x00,0x00,0x00]), 0x4d2ac577);
+    }
 }
