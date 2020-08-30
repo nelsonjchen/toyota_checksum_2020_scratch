@@ -36,10 +36,7 @@ pub fn ioactive_checksum(idh: u8, idl: u8, len: u8, data: &[u8]) -> u8 {
 }
 
 pub fn ioactive_checksum_unwrapped(idh: u8, idl: u8, len: u8, data: &[u8]) -> u64 {
-    let data_sum = data
-        .iter()
-        .fold(0, |state, value|
-            {state + *value as u64});
+    let data_sum = data.iter().fold(0, |state, value| state + *value as u64);
     idh as u64 + idl as u64 + len as u64 + data_sum
 }
 
@@ -77,7 +74,6 @@ mod tests {
         assert_eq!(copy_paste_input(0x2e4, "e2000000cd"), 0xcd)
     }
 
-
     #[test]
     fn test_nelsons_corolla_128() {
         assert_eq!(copy_paste_input(0x2e4, "e2000000cd"), 0xcd)
@@ -110,21 +106,33 @@ mod tests {
 
     #[test]
     fn test_comma_prime_lka_nelson_0() {
-        assert_eq!(copy_paste_nelson_input(0x2e4, "920000004d2ac577"), 0x4d2ac577);
+        assert_eq!(
+            copy_paste_nelson_input(0x2e4, "920000004d2ac577"),
+            0x4d2ac577
+        );
     }
 
     #[test]
     fn test_comma_prime_lka_nelson_crc32() {
-        assert_eq!(copy_paste_nelson_input(0x2e4, "920000004d2ac577"), 0x4d2ac577);
+        assert_eq!(
+            copy_paste_nelson_input(0x2e4, "920000004d2ac577"),
+            0x4d2ac577
+        );
     }
 
     #[test]
     fn test_crc32_just_data() {
-        assert_eq!(crc::crc32::checksum_ieee(&[0x92,0x00,0x00,0x00]), 0x4d2ac577);
+        assert_eq!(
+            crc::crc32::checksum_ieee(&[0x92, 0x00, 0x00, 0x00]),
+            0x4d2ac577
+        );
     }
 
     #[test]
     fn test_crc32_addr_len_data() {
-        assert_eq!(crc::crc32::checksum_ieee(&[0x02,0xe4, 0x08, 0x92,0x00,0x00,0x00]), 0x4d2ac577);
+        assert_eq!(
+            crc::crc32::checksum_ieee(&[0x02, 0xe4, 0x08, 0x92, 0x00, 0x00, 0x00]),
+            0x4d2ac577
+        );
     }
 }
