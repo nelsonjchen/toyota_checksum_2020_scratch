@@ -1,9 +1,9 @@
-fn copy_paste_input(address: u16, data_string: &str) -> u8 {
+pub fn copy_paste_input(address: u16, data_string: &str) -> u8 {
     let decoded_bytes = hex::decode(data_string).unwrap();
     comma_input(address, &decoded_bytes)
 }
 
-fn comma_input(address: u16, data: &[u8]) -> u8 {
+pub fn comma_input(address: u16, data: &[u8]) -> u8 {
     let address_bytes = address.to_be_bytes();
     let idh = address_bytes[0];
     let idl = address_bytes[1];
