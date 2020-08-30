@@ -1,3 +1,11 @@
+
+
+fn copy_paste_input(address: u16, data_string: &str) -> u8 {
+    let decoded_bytes = hex::decode(data_string).unwrap();
+    comma_input(address, &decoded_bytes)
+}
+
+
 fn comma_input(address: u16, data: &[u8]) -> u8 {
     let address_bytes = address.to_be_bytes();
     let idh = address_bytes[0];
@@ -37,5 +45,10 @@ mod tests {
     #[test]
     fn test_comma_input() {
         assert_eq!(comma_input(0x02e4, &[0xf8, 0, 0, 0, 0]), 0xe3);
+    }
+
+    #[test]
+    fn test_copy_paste_input() {
+        assert_eq!(copy_paste_input(0x2e4, "f800000000"), 0xe3);
     }
 }
