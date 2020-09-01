@@ -44,49 +44,68 @@ pub fn ioactive_checksum_unwrapped(idh: u8, idl: u8, len: u8, data: &[u8]) -> u6
 mod tests {
     use super::*;
 
-    #[test]
-    fn test_ioactive_from_pdf() {
-        assert_eq!((0x02 + 0xe4 + 0x05 + 0xf8) & 0xff, 0xe3);
-    }
+    mod oldalg {
+        use super::*;
+        #[test]
+        fn test_ioactive_from_pdf() {
+            assert_eq!((0x02 + 0xe4 + 0x05 + 0xf8) & 0xff, 0xe3);
+        }
 
-    #[test]
-    fn test_ioactive_rust_impl() {
-        assert_eq!(ioactive_checksum(0x02, 0xe4, 0x05, &[0xf8, 0, 0, 0]), 0xe3);
-    }
+        #[test]
+        fn test_ioactive_rust_impl() {
+            assert_eq!(ioactive_checksum(0x02, 0xe4, 0x05, &[0xf8, 0, 0, 0]), 0xe3);
+        }
 
-    #[test]
-    fn test_comma_input() {
-        assert_eq!(comma_input(0x02e4, &[0xf8, 0, 0, 0, 0]), 0xe3);
-    }
+        #[test]
+        fn test_comma_input() {
+            assert_eq!(comma_input(0x02e4, &[0xf8, 0, 0, 0, 0]), 0xe3);
+        }
 
-    #[test]
-    fn test_copy_paste_input_invalid() {
-        assert_eq!(copy_paste_input(0x2e4, "f800000000"), 0xe3);
-    }
+        #[test]
+        fn test_copy_paste_input_invalid() {
+            assert_eq!(copy_paste_input(0x2e4, "f800000000"), 0xe3);
+        }
 
-    #[test]
-    fn test_copy_paste_input_valid() {
-        assert_eq!(copy_paste_input(0x2e4, "f8000000e3"), 0xe3);
-    }
+        #[test]
+        fn test_copy_paste_input_valid() {
+            assert_eq!(copy_paste_input(0x2e4, "f8000000e3"), 0xe3);
+        }
 
-    #[test]
-    fn test_nelsons_corolla_2() {
-        assert_eq!(copy_paste_input(0x2e4, "e2000000cd"), 0xcd)
-    }
+        #[test]
+        fn test_nelsons_corolla_2() {
+            assert_eq!(copy_paste_input(0x2e4, "e2000000cd"), 0xcd)
+        }
 
-    #[test]
-    fn test_nelsons_corolla_128() {
-        assert_eq!(copy_paste_input(0x2e4, "e2000000cd"), 0xcd)
-    }
+        #[test]
+        fn test_nelsons_corolla_128() {
+            assert_eq!(copy_paste_input(0x2e4, "e2000000cd"), 0xcd)
+        }
 
-    #[test]
-    fn test_nelsons_corolla_130() {
-        assert_eq!(copy_paste_input(0x2e4, "940000007f"), 0x7f)
-    }
+        #[test]
+        fn test_nelsons_corolla_130() {
+            assert_eq!(copy_paste_input(0x2e4, "940000007f"), 0x7f)
+        }
 
-    #[test]
-    fn test_nelsons_corolla_0() {
-        assert_eq!(copy_paste_input(0x2e4, "940000007f"), 0x7f)
+        #[test]
+        fn test_nelsons_corolla_0() {
+            assert_eq!(copy_paste_input(0x2e4, "940000007f"), 0x7f)
+        }
+
+        #[test]
+        fn test_comma_prime_lka_same_data_1() {
+            assert_eq!(
+                copy_paste_input(0x2e4, "a20000007f66e2e6"),
+                0xe6
+            );
+        }
+
+        #[test]
+        fn test_comma_prime_lka_same_data_2() {
+            assert_eq!(
+                copy_paste_input(0x2e4, "a2000000a7ea6089"),
+                0x89
+            );
+        }
     }
 
     #[test]
@@ -97,6 +116,11 @@ mod tests {
     #[test]
     fn test_comma_matty_prime_lka_2() {
         assert_eq!(copy_paste_input(0x2e4, "d8000000022d38ec"), 0xec);
+    }
+
+    #[test]
+    fn test_comma_matty_prime_lka_0_last() {
+        assert_eq!(copy_paste_input(0x2e4, "9200000000000077"), 0x77);
     }
 
     #[test]
@@ -126,6 +150,8 @@ mod tests {
             0x4d2ac577
         );
     }
+
+
 
     #[test]
     fn test_crc32_just_data() {
