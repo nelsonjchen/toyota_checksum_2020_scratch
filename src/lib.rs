@@ -92,6 +92,11 @@ mod tests {
         }
 
         #[test]
+        fn test_jamil() {
+            assert_eq!(copy_paste_input(0x262, "0000000200ff"), 0x6c)
+        }
+
+        #[test]
         fn test_comma_prime_lka_same_data_1() {
             assert_eq!(
                 copy_paste_input(0x2e4, "a20000007f66e2e6"),
@@ -104,6 +109,14 @@ mod tests {
             assert_eq!(
                 copy_paste_input(0x2e4, "a2000000a7ea6089"),
                 0x89
+            );
+        }
+
+        #[test]
+        fn test_comma_prime_lka_same_data_2_first() {
+            assert_eq!(
+                copy_paste_input(0x2e4, "a2000000a7ea6089"),
+                0xa7
             );
         }
     }
