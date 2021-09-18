@@ -147,6 +147,10 @@ mod tests {
         assert_eq!(copy_paste_input(0x283, "0000000093264705"), 0x05);
     }
 
+    #[test]
+    fn test_comma_md1000_sienna_lka_0() {
+        assert_eq!(copy_paste_input(0x2e4, "a800000075e20a7d"), 0x7d);
+    }
 
     #[test]
     fn test_comma_prime_lka_nelson_0() {
