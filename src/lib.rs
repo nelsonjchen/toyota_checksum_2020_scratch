@@ -153,6 +153,11 @@ mod tests {
     }
 
     #[test]
+    fn test_comma_some_chr_hybrid_lka_0() {
+        assert_eq!(copy_paste_input(0x2e4, "a6000000dbe07e5a"), 0x5a);
+    }
+
+    #[test]
     fn test_comma_prime_lka_nelson_0() {
         assert_eq!(
             copy_paste_nelson_input(0x2e4, "920000004d2ac577"),
