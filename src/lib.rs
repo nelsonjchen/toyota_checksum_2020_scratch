@@ -77,6 +77,22 @@ mod tests {
         }
 
         #[test]
+        fn test_toto_lta() {
+            assert_eq!(copy_paste_input(0x190, "02fc00dc595cf0"), 0xf0)
+        }
+
+        #[test]
+        fn test_nelson_lta() {
+            assert_eq!(copy_paste_input(0x191, "f600003064640088"), 0x88)
+        }
+
+
+        #[test]
+        fn test_rohang88_lka() {
+            assert_eq!(copy_paste_input(0x2e4, "c2000000ad"), 0xad)
+        }
+
+        #[test]
         fn test_nelsons_corolla_128() {
             assert_eq!(copy_paste_input(0x2e4, "e2000000cd"), 0xcd)
         }
