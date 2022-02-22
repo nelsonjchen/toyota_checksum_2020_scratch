@@ -135,6 +135,22 @@ mod tests {
                 0xa7
             );
         }
+
+        #[test]
+        fn test_comma_prime_lta() {
+            assert_eq!(
+                copy_paste_input(0x191, "800000000005001f"),
+                0x1f
+            );
+        }
+
+        #[test]
+        fn test_comma_prime_lta_alt() {
+            assert_eq!(
+                copy_paste_input(0x191, "df00000000000079"),
+                0x79
+            );
+        }
     }
 
     #[test]
